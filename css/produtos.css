@@ -1,0 +1,95 @@
+.produtos-total p, h3, span, h2 {
+    color: lightcyan;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.produtos-total {
+    background-color: #000;
+    flex-grow: 1;
+}
+
+.filtros-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.categorias {
+    background-color: #000;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 10%;
+}
+
+
+.produtos {
+    background-color: #0c1e3671;
+    min-height: 100%;
+    width: 50%;
+    overflow: hidden;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.produto-card {
+    width: 240px;
+    height: 300px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.produto-card p, span {
+    color: #000;
+    font-size: 1.1rem;
+}
+
+.card-container {
+    display: flex;
+    gap: 40px;
+    align-items: flex-end;
+    padding-left: 20px;
+}
+
+.produto-card button {
+    background-color: #C80C00;
+    width: 90px;
+    height: 35px;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.produtos-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.produtos-titulos {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.image-card-container {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-card-container img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.produtos-titulos input {
+    background-color: #C4C4C4;
+    border-radius: 10px;
+    padding-left: 10px;
+    
+}
+

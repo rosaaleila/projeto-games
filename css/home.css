@@ -1,0 +1,15 @@
+
+.container-slide {
+    width: 100%;
+    height: 100%;
+    background-color: lavender;
+}
+
+.banner-principal {
+    padding-top: 0;
+}
+
+.container-slide img {
+    height: 120%;
+    width: 100%;
+}
