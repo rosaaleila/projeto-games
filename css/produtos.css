@@ -1,4 +1,7 @@
-.produtos-total p, h3, span, h2 {
+.produtos-total p,
+h3,
+span,
+h2 {
     color: lightcyan;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -6,9 +9,8 @@
 .produtos-total {
     background-color: #000;
     overflow: hidden;
-    height: auto;
+    height: 500px;
     min-height: 1000px;
-    height: 400px;
 }
 
 .filtros-container {
@@ -50,7 +52,8 @@
     background-color: white;
 }
 
-.produto-card p, span {
+.produto-card p,
+span {
     color: #000;
     font-size: 1.1rem;
 }
@@ -99,6 +102,5 @@
 .produtos-titulos input {
     background-color: #C4C4C4;
     border-radius: 10px;
-    padding-left: 10px;    
+    padding-left: 10px;
 }
-
