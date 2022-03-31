@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="./css/dashboard.css">
     <title>Dashboard</title>
 </head>
+
 <body>
     <main>
         <div class="container-banner">
@@ -58,6 +60,25 @@
 
         <div class="container-sessao">
             <h3>Titulo da sessão</h1>
+                <div class="container-tabela">
+
+                    <?php
+
+                    require_once('controller/controllerContatos.php');
+                    $listContato = listarContatos();
+                    foreach ($listContato as $item) {
+                    ?>
+                        <table>
+                            <tr>
+                                <td><?= $item['nome'] ?></td>
+                                <td><?= $item['email'] ?></td>
+                                <td><?= $item['mensagem'] ?></td>
+                            </tr>
+                        </table>
+                    <?php
+                    }
+                    ?>
+                </div>
         </div>
     </main>
     <footer>
@@ -65,4 +86,5 @@
         <span>Desenvolvido por Leila Rosa. Versão 1.0.0</span>
     </footer>
 </body>
+
 </html>
