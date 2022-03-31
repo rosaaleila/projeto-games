@@ -8,8 +8,8 @@ body {
 
 .container-login {
     background-color: whitesmoke;
-    height: 300px;
-    width: 400px;
+    height: 400px;
+    width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,12 +18,20 @@ body {
 }
 
 .container-login input {
-    height: 25px;
+    height: 35px;
+    width: 400px;
+    border-radius: 2px;
 }
 
-.container-login h1,h2, label {
+.container-login h1,
+h2,
+label {
     font-family: 'Open Sans', sans-serif;
-    font-size: 1rem;
+}
+
+.container-login h1,
+h2 {
+    font-size: 1.5rem;
 }
 
 .container-login h2 {
@@ -31,10 +39,35 @@ body {
 }
 
 .container-login button {
-    margin-top: 20px;
+    margin-top: 40px;
     background-color: #0e5f92;
-    height: 30px;
+    height: 50px;
     color: white;
     border-radius: 2px;
-    width: 100px;
+    width: 200px;
+    cursor: pointer;
+}
+
+.container-titulos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-login button:hover {
+    background-color: #00063A;
+    transition: linear 0.3s;
+}
+
+.container-inputs {
+    text-align: right;
+}
+
+.container-inputs input:first-of-type {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.container-inputs label {
+    font-size: 1.2rem;
 }

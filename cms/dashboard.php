@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/dashboard.css">
     <title>Dashboard</title>
 </head>
 <body>
@@ -14,32 +15,32 @@
                 <h2>Gerenciamento do conteúdo do site</h2>
             </div>
             <div class="container-img-logo">
-                <img src="" alt="">
+                <img src="./imgs/logozinho.png" alt="">
             </div>
         </div>
         <div class="container-banner-opcoes">
             <div class="container-sessoes">
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <img src="" alt="">
+                        <a href="#"><img src="./imgs/produto.png" alt=""></a>
                     </div>
                     <p>Adm. de Produtos</p>
                 </div>
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <img src="" alt="">
+                        <a href="#"><img src="./imgs/categoria.png" alt=""></a>
                     </div>
                     <p>Adm. de Categorias</p>
                 </div>
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <img src="" alt="">
+                        <a href="#"><img src="./imgs/contato.png" alt=""></a>
                     </div>
                     <p>Contatos</p>
                 </div>
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <img src="" alt="">
+                        <a href="#"><img src="./imgs/user.png" alt=""></a>
                     </div>
                     <p>Usuários</p>
                 </div>
@@ -48,7 +49,7 @@
                 <p>Bem-vindo {nome}</p>
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <img src="" alt="">
+                        <a href="#"><img src="./imgs/logout.png" alt=""></a>
                     </div>
                     <p>Logout</p>
                 </div>
@@ -60,7 +61,8 @@
         </div>
     </main>
     <footer>
-        <span>Desenvolvido por Leila Rosa. Versão 1.0</span>
+        <span>Copyright 2022 © Todos os direitos reservados</span>
+        <span>Desenvolvido por Leila Rosa. Versão 1.0.0</span>
     </footer>
 </body>
 </html>

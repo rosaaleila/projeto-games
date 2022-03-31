@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background-color: #040404;
+}
+
+.container-banner {
+    height: 15vh;
+    background-color: #003D8E;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5% 0;
+}
+
+body p,
+span,
+h1,
+h2,
+h3 {
+    font-family: 'Open Sans', sans-serif;
+    color: whitesmoke;
+}
+
+body h1,
+h2 {
+    font-size: 1.8rem;
+}
+
+.container-opcoes p {
+    font-size: 1.3rem;
+}
+
+.container-img-logo {
+    height: 100px;
+    width: 100px;
+}
+
+.container-img-logo img {
+    height: 100%;
+    height: 100%;
+}
+
+.container-banner-opcoes {
+    height: 20vh;
+    background-color: #2a6cc4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5% 0;
+}
+
+.container-sessoes {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-opcoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-icon {
+    height: 64px;
+    width: 64px;
+    margin-bottom: 10px;
+}
+
+.container-icon img {
+    height: 100%;
+    width: 100%;
+}
+
+.container-sessao {
+    height: 55vh;
+    padding: 30px 5% 0;
+}
+
+footer {
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+    font-size: 1.1rem;
+    background-color: #09499c;
+}
+
+.container-sessao h3 {
+    font-size: 1.7rem;
+}
+
+.container-infos p {
+    font-size: 1.2rem;
+}
+
+.container-infos>div {
+    margin-top: 20px;
+}
