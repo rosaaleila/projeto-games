@@ -1,0 +1,51 @@
+.container-tabela {
+    color: whitesmoke;
+}
+
+.img-deletar {
+    width: 30px;
+    height: 30px;
+}
+
+.td-esquerda {
+    text-align: left;
+}
+
+.td-meio {
+    text-align: center;
+}
+
+.td-direita {
+    text-align: right;
+}
+
+.tabela-contatos td {
+    border: silver 1px solid;
+    width: 500px;
+    padding: 10px 0 10px;
+}
+
+.tabela-contatos {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.1rem;
+}
+
+.th-esquerda,
+.th-meio,
+.th-direita {
+    text-align: center;
+}
+
+.lixeira {
+    max-width: 35px;
+}
+
+.tabela-contatos td:nth-child(4) {
+    align-content: center;
+}
+
+th {
+    background-color: #2a6cc4;
+    width: 200px;
+    height: 40px;
+}

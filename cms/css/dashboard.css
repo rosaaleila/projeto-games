@@ -79,8 +79,9 @@ h2 {
 }
 
 .container-sessao {
-    height: 55vh;
-    padding: 30px 5% 0;
+    height: auto;
+    min-height: 55vh;
+    padding: 30px 5% 30px;
 }
 
 footer {
@@ -104,8 +105,4 @@ footer {
 
 .container-infos>div {
     margin-top: 20px;
-}
-
-.container-tabela {
-    background-color: whitesmoke;
 }

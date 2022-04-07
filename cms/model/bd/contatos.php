@@ -45,4 +45,24 @@
 
  }
 
-?>
+ function excluirContato($id)
+ {
+
+    $conexao = abrirConexaoSql();
+
+    $sql = "delete from tblcontatos where idcontato =" . $id;
+
+    $status = (bool) false;
+
+    // verificando se o script deu certo
+    if (mysqli_query($conexao, $sql)) {
+
+        if(mysqli_affected_rows($conexao))
+            $status = true;
+    
+        }
+
+    fecharConexaoSql($conexao);
+    return $status;
+
+ }
