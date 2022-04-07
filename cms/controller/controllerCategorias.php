@@ -16,7 +16,7 @@ function inserirCategoria($dadosCategoria)
 
             $arrayCategoria = array( "nome" => $dadosCategoria['txtNome'] );
         
-            require_once('../model/bd/categorias.php');
+            require_once('model/bd/categorias.php');
 
             if(insertCategoria($arrayCategoria))
                 return true;

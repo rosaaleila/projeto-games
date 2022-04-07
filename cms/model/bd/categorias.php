@@ -60,7 +60,7 @@ function insertCategoria($dadosCategorias)
     $conexao = abrirConexaoSql();
 
     $sql = "insert into tblcategorias(nome)
-            values('" . $dadosCategorias['nome'] . "';";
+            values('" . $dadosCategorias['nome'] . "');";
 
     if(mysqli_query($conexao, $sql))
         if(mysqli_affected_rows($conexao))
