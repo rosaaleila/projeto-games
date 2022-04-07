@@ -11,7 +11,7 @@
 $action = (string) null;
 $component = (string) null;
 
-if ($_SERVER['REQUEST_METHOD'] ==  'GET') {
+if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST') {
 
     $component = strtolower($_GET['component']);
     $action = strtolower($_GET['action']);
@@ -22,20 +22,30 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET') {
         case 'contatos';
             require_once('controller/controllerContatos.php');
 
-            if($action == 'deletar') {
+            if ($action == 'deletar') {
 
                 $idContato = $_GET['id'];
                 $result = deletarContato($idContato);
 
-                if(is_bool($result)) {
-                    if($result)
-                        echo('<script> alert("Registro Deletado com Sucesso!"); window.location.href="dashboard.php"; </script>');
+                if (is_bool($result)) {
+                    if ($result)
+                        echo ('<script> alert("Registro Deletado com Sucesso!"); window.location.href="contato.php"; </script>');
                 } elseif (is_array($result))
-                    echo('<script> alert("' . $result["message"] . '");  </script>');
-
+                    echo ('<script> alert("' . $result["message"] . '");  </script>');
             }
 
+        case 'categorias';
+
+            require_once('controller/controllerCategorias.php');
+
+            if ($action == 'inserir') {
+
+                $result = inserirCategoria($_POST);
+                if (is_bool($result))
+                    if ($result)
+                        echo ('<script> alert("Registro Inserido com Sucesso!"); window.location.href="categoria.php"; </script>');
+                    elseif (is_array($result))
+                        echo ('<script> alert("' . $result["message"] . '");  </script>');
+            }
     }
-
-
 }

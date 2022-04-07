@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/dashboard.css">
-    <link rel="stylesheet" type="text/css" href="./css/contatos.css">
     <title>Dashboard</title>
 </head>
 
@@ -31,13 +30,13 @@
                 </div>
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <a href="./pages/categoria.php"><img src="./imgs/categoria.png" alt=""></a>
+                        <a href="categoria.php"><img src="./imgs/categoria.png" alt=""></a>
                     </div>
                     <p>Adm. de Categorias</p>
                 </div>
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <a href="./pages/contato.php"><img src="./imgs/contato.png" alt=""></a>
+                        <a href="contato.php"><img src="./imgs/contato.png" alt=""></a>
                     </div>
                     <p>Contatos</p>
                 </div>

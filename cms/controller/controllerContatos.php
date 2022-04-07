@@ -11,7 +11,7 @@
 
 function listarContatos()
 {
-    require_once('../model/bd/contatos.php');
+    require_once('model/bd/contatos.php');
 
     $dados = selectAllContatos();
 
@@ -27,7 +27,7 @@ function deletarContato($id)
 
     if ($id != 0 && !empty($id) && is_numeric($id)) {
 
-        require_once('../model/bd/contatos.php');
+        require_once('model/bd/contatos.php');
 
         if (excluirContato($id))
             return true;

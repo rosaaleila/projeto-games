@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
-    <link rel="stylesheet" type="text/css" href="../css/contatos.css">
+    <link rel="stylesheet" type="text/css" href="./css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="./css/categorias.css">
     <title>Dashboard</title>
 </head>
 
@@ -18,32 +18,32 @@
                 <h2>Gerenciamento do conteúdo do site</h2>
             </div>
             <div class="container-img-logo">
-                <img src="../imgs/logozinho.png" alt="">
+                <img src="./imgs/logozinho.png" alt="">
             </div>
         </div>
         <div class="container-banner-opcoes">
             <div class="container-sessoes">
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <a href="#"><img src="../imgs/produto.png" alt=""></a>
+                        <a href="#"><img src="./imgs/produto.png" alt=""></a>
                     </div>
                     <p>Adm. de Produtos</p>
                 </div>
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <a href="./categoria.php"><img src="../imgs/categoria.png" alt=""></a>
+                        <a href="#"><img src="./imgs/categoria.png" alt=""></a>
                     </div>
                     <p>Adm. de Categorias</p>
                 </div>
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <a href="#"><img src="../imgs/contato.png" alt=""></a>
+                        <a href="contato.php"><img src="./imgs/contato.png" alt=""></a>
                     </div>
                     <p>Contatos</p>
                 </div>
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <a href="#"><img src="../imgs/user.png" alt=""></a>
+                        <a href="#"><img src="./imgs/user.png" alt=""></a>
                     </div>
                     <p>Usuários</p>
                 </div>
@@ -52,7 +52,7 @@
                 <p>Bem-vindo {nome}</p>
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <a href="#"><img src="../imgs/logout.png" alt=""></a>
+                        <a href="#"><img src="./imgs/logout.png" alt=""></a>
                     </div>
                     <p>Logout</p>
                 </div>
@@ -60,36 +60,27 @@
         </div>
 
         <div class="container-sessao">
-            <h3>Mensagens</h3>
-                <div class="container-tabela">
+            <h3>Categorias</h3>
 
-                    <table class="tabela-contatos">
-                    <th class="th-esquerda">Nome</th>
-                    <th class="th-meio">E-mail</th>
-                    <th class="th-direita">Mensagem</th>
-                    <th class="lixeira"></th>
-
-                        <?php
-
-                        require_once('../controller/controllerContatos.php');
-                        $listContato = listarContatos();
-
-                        foreach ($listContato as $item) {
-                        ?>
-                            <tr>
-                                <td class="td-esquerda"><?= $item['nome'] ?></td>
-                                <td class="td-meio"><?= $item['email'] ?></td>
-                                <td class="td-direita"><?= $item['mensagem'] ?></td>
-                                <td class="lixeira"><a href="router.php?component=contatos&action=deletar&id=<?= $item['id'] ?>"><img class="img-deletar" title="Deletar" src="../imgs/apagar.png" alt=""></a></td>
-                            </tr>
-                            
-                        <?php
-                        }
-                        ?>
-
-                    </table>
-
+            <div class="container-categorias">
+                <div class="container-form">
+                    <form action="router.php?component=categorias&action=inserir" method="post">
+                        <div class="container-input">
+                            <label>Nome:</label>
+                            <input type="text" name="txtNome">
+                        </div>
+                        <input type="submit" value="Salvar">
                 </div>
+                </form>
+                <div class="container-listagem">
+                    <table class="tabela-categorias">
+                        <th>Nome</th>
+                        <th>Opções</th>
+                    </table>
+                </div>
+            </div>
+
+
         </div>
     </main>
     <footer>

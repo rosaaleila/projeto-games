@@ -1,15 +1,15 @@
 <?php
 
 /*************************************************************
- * Objetivo: arquivo responsável por manipular os dados do BD
+ * Objetivo: arquivo responsável por manipular os dados de contatos
+ *                                                          do BD
  * Autor: Leila Rosa
  * Data: 31/03/22
- * Versão: 1.0
+ * Versão: 1.1
  *************************************************************/
 
  require_once("conexaoMySql.php");
 
- // função para listar todos os contatos no BD
  function selectAllContatos()
  {
     $conexao = abrirConexaoSql();
