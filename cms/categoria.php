@@ -69,13 +69,30 @@
                             <label>Nome:</label>
                             <input type="text" name="txtNome">
                         </div>
-                        <input type="submit" value="Salvar">
+                        <input class="botaoSalvar" type="submit" value="Salvar">
                 </div>
                 </form>
                 <div class="container-listagem">
                     <table class="tabela-categorias">
                         <th>Nome</th>
                         <th>Opções</th>
+
+                        <?php
+
+                        require_once('controller/controllerCategorias.php');
+                        $listCategorias = listarCategorias();
+
+                        foreach ($listCategorias as $item) {
+                        ?>
+                            <tr>
+                                <td class="td-nome"><?= $item['nome']; ?></td>
+                                <td class="lixeira"><a onclick="return confirm('Deseja realmente excluir esse registro?');" href="router.php?component=categorias&action=deletar&id=<?= $item['id'] ?>"><img class="lixeira" src="./imgs/apagar.png" title="Deletar" alt="Deletar"></a></td>
+                            </tr>
+
+                        <?php
+                        }
+                        ?>
+
                     </table>
                 </div>
             </div>

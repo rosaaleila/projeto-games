@@ -9,7 +9,7 @@
  * Versão: 1.0
  *************************************************************/
 
-require_once(conexaoMySql());
+require_once('conexaoMySql.php');
 
 function selectAllCategorias()
 {
@@ -48,8 +48,23 @@ function selectAllCategorias()
 
 }
 
-function excluirCategoria()
-{}
+function deletarCategoria($id)
+{
+
+    $conexao = abrirConexaoSql();
+
+    $sql = 'delete from tblcategorias where idcategoria =' . $id;
+
+    $status = (bool) false;
+
+    if(mysqli_query($conexao, $sql)) 
+        if(mysqli_affected_rows($conexao))
+            $status = true;
+
+    fecharConexaoSql($conexao);
+    return $status;
+
+}
 
 
 function insertCategoria($dadosCategorias)

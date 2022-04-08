@@ -40,12 +40,23 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
 
             if ($action == 'inserir') {
 
-                $result = inserirCategoria($_POST);
+                $result = adicionarCategoria($_POST);
+
                 if (is_bool($result))
                     if ($result)
                         echo ('<script> alert("Registro Inserido com Sucesso!"); window.location.href="categoria.php"; </script>');
                     elseif (is_array($result))
-                        echo ('<script> alert("' . $result["message"] . '");  </script>');
+                        echo ('<script> alert("' . $result["message"] . '"); window.history.back();  </script>');
+            } elseif ($action == 'deletar') {
+
+                $idCategoria = $_GET['id'];
+                $result = excluirCategoria($idCategoria);
+
+                if (is_bool($result)) {
+                    if ($result)
+                        echo ('<script> alert("Registro Deletado com Sucesso!"); window.location.href="categoria.php"; </script>');
+                } elseif (is_array($result))
+                        echo ('<script> alert("' . $result["message"] . '"); window.history.back(); </script>');
             }
     }
 }

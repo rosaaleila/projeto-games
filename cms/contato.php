@@ -80,7 +80,7 @@
                                 <td class="td-esquerda"><?= $item['nome'] ?></td>
                                 <td class="td-meio"><?= $item['email'] ?></td>
                                 <td class="td-direita"><?= $item['mensagem'] ?></td>
-                                <td class="lixeira"><a href="router.php?component=contatos&action=deletar&id=<?= $item['id'] ?>"><img class="img-deletar" title="Deletar" src="./imgs/apagar.png" alt=""></a></td>
+                                <td class="lixeira"><a onclick="return confirm('Deseja realmente excluir esse registro?');" href="router.php?component=contatos&action=deletar&id=<?= $item['id'] ?>"><img class="img-deletar" title="Deletar" src="./imgs/apagar.png" alt=""></a></td>
                             </tr>
                             
                         <?php

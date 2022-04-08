@@ -7,3 +7,58 @@ th {
 .container-categorias {
     color: whitesmoke;
 }
+
+.tabela-categorias td {
+    border: silver 1px solid;
+    width: 500px;
+    padding: 10px 0 10px;
+}
+
+.tabela-categorias {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.1rem;
+}
+
+.lixeira {
+    max-width: 35px;
+}
+
+.tabela-categorias td {
+    align-content: center;
+}
+
+.container-listagem {
+    height: auto;
+}
+
+form {
+    width: 30vw;
+    height: 10vh;
+    background-color: whitesmoke;
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.container-input {
+    display: flex;
+}
+
+.container-form input {
+    font-size: 1.1rem;
+    width: 10vw;
+    height: 30px;
+}
+
+.botaoSalvar {
+    background-color: #2a6cc4;
+}
+
+.container-categorias {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
