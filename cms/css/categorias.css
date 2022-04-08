@@ -19,8 +19,15 @@ th {
     font-size: 1.1rem;
 }
 
-.lixeira {
-    max-width: 35px;
+.opcoes {
+    max-width: 200px;
+    display: flex;
+    gap: 20px;
+}
+
+.opcoes img {
+    width: 35px;
+    height: 35px;
 }
 
 .tabela-categorias td {

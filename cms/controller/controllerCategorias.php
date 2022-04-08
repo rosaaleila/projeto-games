@@ -5,7 +5,7 @@
  * Obs.: também fará a ponte entre view e model
  * Autor: Leila Rosa
  * Data: 07/04/22
- * Versão: 1.0
+ * Versão: 1.3
  ******************************************************************/
 
 function adicionarCategoria($dadosCategoria)
@@ -65,4 +65,25 @@ function listarCategorias()
         return $dadosCategoria;
     else
         return false;
+}
+
+function buscarCategoria($id)
+{
+
+    if ($id != 0 && !empty($id) && is_numeric($id)) {
+
+        require_once('model/bd/categorias.php');
+
+        $dadosCategoria = selectByIdCategoria($id);
+
+        if (!empty($dadosCategoria))
+            return $dadosCategoria;
+        else
+            return false;
+    } else
+        return array(
+            'idErro'   => 4,
+            'message'   => 'Não é possível buscar um registro sem informar um ID válido.'
+        );
+        
 }

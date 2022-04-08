@@ -1,11 +1,10 @@
 <?php
 
-
 /*************************************************************
  * Objetivo: arquivo de rota entre a view e a model
  * Autor: Leila Rosa
  * Data: 07/04/22
- * Versão: 1.0
+ * Versão: 1.4
  *************************************************************/
 
 $action = (string) null;
@@ -57,6 +56,18 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
                         echo ('<script> alert("Registro Deletado com Sucesso!"); window.location.href="categoria.php"; </script>');
                 } elseif (is_array($result))
                         echo ('<script> alert("' . $result["message"] . '"); window.history.back(); </script>');
+            } elseif ($action == 'buscar') {
+
+                $idCategoria = $_GET['id'];
+
+                $dados = buscarCategoria($idCategoria);
+
+                session_start();
+
+                $_SESSION['dadosCategoria'] = $dados;
+
+                require_once('categoria.php');
+
             }
     }
 }

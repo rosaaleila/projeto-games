@@ -6,7 +6,7 @@
  *                                                             do BD
  * Autor: Leila Rosa
  * Data: 07/04/22
- * Versão: 1.0
+ * Versão: 1.4
  *************************************************************/
 
 require_once('conexaoMySql.php');
@@ -26,7 +26,7 @@ function selectAllCategorias()
 
         while ($dadosCategorias = mysqli_fetch_assoc($result)) {
 
-            $arrayCategorias[$cont] = array (
+            $arrayCategorias[$cont] = array(
                 'id'    => $dadosCategorias['idcategoria'],
                 'nome'  => $dadosCategorias['nome']
             );
@@ -36,7 +36,6 @@ function selectAllCategorias()
         fecharConexaoSql($conexao);
 
         return $arrayCategorias;
-
     } else {
         fecharConexaoSql($conexao);
         return array(
@@ -44,8 +43,6 @@ function selectAllCategorias()
             'message'   => 'Objeto não foi encontrado no banco.'
         );
     }
-
-
 }
 
 function deletarCategoria($id)
@@ -57,15 +54,13 @@ function deletarCategoria($id)
 
     $status = (bool) false;
 
-    if(mysqli_query($conexao, $sql)) 
-        if(mysqli_affected_rows($conexao))
+    if (mysqli_query($conexao, $sql))
+        if (mysqli_affected_rows($conexao))
             $status = true;
 
     fecharConexaoSql($conexao);
     return $status;
-
 }
-
 
 function insertCategoria($dadosCategorias)
 {
@@ -77,11 +72,14 @@ function insertCategoria($dadosCategorias)
     $sql = "insert into tblcategorias(nome)
             values('" . $dadosCategorias['nome'] . "');";
 
-    if(mysqli_query($conexao, $sql))
-        if(mysqli_affected_rows($conexao))
+    if (mysqli_query($conexao, $sql))
+        if (mysqli_affected_rows($conexao))
             $status = true;
 
     fecharConexaoSql($conexao);
     return $status;
+}
 
+function selectByIdCategoria($id) {
+    
 }

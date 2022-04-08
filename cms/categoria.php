@@ -86,7 +86,14 @@
                         ?>
                             <tr>
                                 <td class="td-nome"><?= $item['nome']; ?></td>
-                                <td class="lixeira"><a onclick="return confirm('Deseja realmente excluir esse registro?');" href="router.php?component=categorias&action=deletar&id=<?= $item['id'] ?>"><img class="lixeira" src="./imgs/apagar.png" title="Deletar" alt="Deletar"></a></td>
+                                <td class="opcoes">
+                                    <a onclick="return confirm('Deseja realmente excluir esse registro?');" href="router.php?component=categorias&action=deletar&id=<?= $item['id'] ?>">
+                                        <img class="lixeira" src="./imgs/apagar.png" title="Deletar" alt="Deletar">
+                                    </a>
+                                    <a href="router.php?component=categorias&action=buscar&id=<?= $item['id'] ?>">
+                                        <img src="./imgs/editar.svg" alt="Editar" title="Editar">
+                                    </a>
+                                </td>
                             </tr>
 
                         <?php
