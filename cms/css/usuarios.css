@@ -1,0 +1,23 @@
+th {
+    background-color: #2a6cc4;
+    width: 200px;
+    height: 40px;
+}
+
+.tabela-usuarios td {
+    align-content: center;
+    border: silver 1px solid;
+    width: 500px;
+    padding: 10px 0 10px;
+}
+
+.tabela-usuarios {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: whitesmoke;
+}
+
+.td-opcoes img {
+    width: 35px;
+    height: 35px;
+}

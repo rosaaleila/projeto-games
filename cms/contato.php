@@ -43,7 +43,7 @@
                 </div>
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <a href="#"><img src="./imgs/user.png" alt=""></a>
+                        <a href="./usuario.php"><img src="./imgs/user.png" alt=""></a>
                     </div>
                     <p>Usuários</p>
                 </div>

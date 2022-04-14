@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="./css/usuarios.css">
     <title>Dashboard</title>
 </head>
 
@@ -42,7 +43,7 @@
                 </div>
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <a href="./usuario.php"><img src="./imgs/user.png" alt=""></a>
+                        <a href="#"><img src="./imgs/user.png" alt=""></a>
                     </div>
                     <p>Usuários</p>
                 </div>
@@ -59,6 +60,49 @@
         </div>
 
         <div class="container-sessao">
+            <div class="container-infos">
+                <form action="router.php?component=usuarios&action=inserir" method="post">
+                    <p>Nome</p>
+                    <input type="text" name="txtNome">
+                    <p>Login</p>
+                    <input type="text" name="txtLogin">
+                    <p>Senha</p>
+                    <input type="text" name="txtSenha">
+                    <input type="submit" value="Enviar" class="btnEnviar">
+                </form>
+            </div>
+            <div class="container-usuarios">
+                <table class="tabela-usuarios">
+                    <th>Nome</th>
+                    <th>Login</th>
+                    <th>Senha</th>
+                    <th>Opções</th>
+
+                    <?php
+
+                    require_once('controller/controllerUsuarios.php');
+                    $listUsuarios = listarUsuarios();
+
+                    foreach ($listUsuarios as $item) {
+                    ?>
+
+                        <tr>
+                            <td class="td-nome"><?= $item['nome']; ?></td>
+                            <td class="td-login"><?= $item['login']; ?></td>
+                            <td class="td-senha"><?= $item['senha']; ?></td>
+                            <td class="td-opcoes">
+                                <a href="router.php?component=usuarios&action=buscar&id=<?= $item['id'] ?>"><img src="./imgs/editar.svg" alt="Editar"></a>
+                                <a onclick="return confirm('Deseja realmente excluir esse registro?');" href="router.php?component=usuarios&action=deletar&id=<?= $item['id'] ?>"><img src="./imgs/apagar.png" alt="Apagar"></a>
+                            </td>
+                        </tr>
+
+                    <?php
+                    }
+                    ?>
+
+                </table>
+            </div>
+
         </div>
     </main>
     <footer>

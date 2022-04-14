@@ -41,11 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
 
                 $result = adicionarCategoria($_POST);
 
-                if (is_bool($result))
+                if (is_bool($result)) {
                     if ($result)
                         echo ('<script> alert("Registro Inserido com Sucesso!"); window.location.href="categoria.php"; </script>');
-                    elseif (is_array($result))
-                        echo ('<script> alert("' . $result["message"] . '"); window.history.back();  </script>');
+                } elseif (is_array($result))
+                    echo ('<script> alert("' . $result["message"] . '"); window.location.href="categoria.php";  </script>');
             } elseif ($action == 'deletar') {
 
                 $idCategoria = $_GET['id'];
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
                     if ($result)
                         echo ('<script> alert("Registro Deletado com Sucesso!"); window.location.href="categoria.php"; </script>');
                 } elseif (is_array($result))
-                        echo ('<script> alert("' . $result["message"] . '"); window.history.back(); </script>');
+                    echo ('<script> alert("' . $result["message"] . '"); window.history.back(); </script>');
             } elseif ($action == 'buscar') {
 
                 $idCategoria = $_GET['id'];
@@ -67,7 +67,40 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
                 $_SESSION['dadosCategoria'] = $dados;
 
                 require_once('categoria.php');
+            } elseif ($action == 'editar') {
 
+                $idCategoria = $_GET['id'];
+
+                $result = atualizarCategoria($_POST, $idCategoria);
+
+                if (is_bool($result)) {
+                    if ($result)
+                        echo ('<script> alert("Registro Atualizado com Sucesso!"); window.location.href="categoria.php"; </script>');
+                } elseif (is_array($result))
+                    echo ('<script> alert("' . $result["message"] . '"); window.history.back(); </script>');
             }
+        case 'usuarios';
+
+            require_once('controller/controllerUsuarios.php');
+
+            if($action == 'inserir') {
+
+                $result = adicionarUsuario($_POST);
+
+                if (is_bool($result)) {
+                    if($result)
+                        echo('<script> alert("Registro Inserido com Sucesso!"); window.location.href="usuario.php"; </script>');
+                } elseif (is_array($result))
+                    echo('<script> alert("' . $result["message"] . '"); window.history.back();  </script>');
+
+            } elseif ($action == 'deletar') {
+
+            } elseif ($action == 'buscar') {
+
+            } elseif ($action == 'editar') {
+                
+            }
+
+            break;
     }
 }

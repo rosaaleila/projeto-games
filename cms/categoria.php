@@ -1,3 +1,21 @@
+<?php
+
+$form = (string) "router.php?component=categorias&action=inserir";
+
+if (session_status())
+    if (!empty($_SESSION['dadosCategoria'])) {
+
+        $id = $_SESSION['dadosCategoria']['id'];
+        $nome = $_SESSION['dadosCategoria']['nome'];
+
+        $form = "router.php?component=categorias&action=editar&id=" . $id;
+
+        unset($_SESSION['dadosCategoria']);
+    }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +61,7 @@
                 </div>
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <a href="#"><img src="./imgs/user.png" alt=""></a>
+                        <a href="./usuario.php"><img src="./imgs/user.png" alt=""></a>
                     </div>
                     <p>Usuários</p>
                 </div>
@@ -64,10 +82,10 @@
 
             <div class="container-categorias">
                 <div class="container-form">
-                    <form action="router.php?component=categorias&action=inserir" method="post">
+                    <form action="<?= $form ?>" method="post">
                         <div class="container-input">
                             <label>Nome:</label>
-                            <input type="text" name="txtNome">
+                            <input type="text" name="txtNome" value="<?= isset($nome) ? $nome : null ?>">
                         </div>
                         <input class="botaoSalvar" type="submit" value="Salvar">
                 </div>
