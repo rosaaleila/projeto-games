@@ -5,7 +5,7 @@
  *                                                        do BD
  * Autor: Leila Rosa
  * Data: 14/04/22
- * Versão: 1.0
+ * Versão: 1.1
  ****************************************************************/
 
 require_once('conexaoMySql.php');
@@ -23,7 +23,7 @@ function selectAllUsuarios()
 
         $cont = 0;
 
-        while($dadosUsuarios = mysqli_fetch_assoc($result)) {
+        while ($dadosUsuarios = mysqli_fetch_assoc($result)) {
             $arrayUsuarios[$cont] = array(
                 "id"        => $dadosUsuarios['idusuario'],
                 "nome"      => $dadosUsuarios['nome'],
@@ -36,7 +36,6 @@ function selectAllUsuarios()
         fecharConexaoSql($conexao);
 
         return $arrayUsuarios;
-
     } else {
         fecharConexaoSql($conexao);
         return array(
@@ -44,11 +43,24 @@ function selectAllUsuarios()
             'message'   => 'Objeto não foi encontrado no banco.'
         );
     }
-
 }
 
 function deletarUsuario($id)
-{}
+{
+
+    $conexao = abrirConexaoSql();
+
+    $sql = 'delete from tblusuarios where idusuario =' . $id;
+
+    $status = (bool) false;
+
+    if (mysqli_query($conexao, $sql))
+        if (mysqli_affected_rows($conexao))
+            $status = true;
+
+    fecharConexaoSql($conexao);
+    return $status;
+}
 
 function insertUsuario($dadosUsuario)
 {
@@ -62,19 +74,58 @@ function insertUsuario($dadosUsuario)
             values(
                 '" . $dadosUsuario['nome'] . "',
                 '" . $dadosUsuario['login'] . "',
-                '" . $dadosUsuario['senha'] . "');";
+                '" . md5($dadosUsuario['senha']) . "');";
 
-    if(mysqli_query($conexao, $sql))
-        if(mysqli_affected_rows($conexao))
-                $status = true;
-    
+    if (mysqli_query($conexao, $sql))
+        if (mysqli_affected_rows($conexao))
+            $status = true;
+
+    fecharConexaoSql($conexao);
+    return $status;
+}
+
+function selectByIdUsuario($id)
+{
+
+    $conexao = abrirConexaoSql();
+
+    $sql = "select * from tblusuarios where idusuario =" . $id;
+
+    $result = mysqli_query($conexao, $sql);
+
+    if ($dados = mysqli_fetch_assoc($result)) {
+        $arrayUsuarios = array(
+            "id"    => $dados['idusuario'],
+            "nome"    => $dados['nome'],
+            "login"    => $dados['login'],
+            "senha"    => $dados['senha'],
+        );
+    }
+
+    fecharConexaoSql($conexao);
+
+    return $arrayUsuarios;
+}
+
+function updateUsuario($dadosUsuario)
+{
+
+    $conexao = abrirConexaoSql();
+
+    $status = (bool) false;
+
+    $sql = "update tblusuarios set
+                    nome = '" . $dadosUsuario['nome'] . "',
+                    login = '" . $dadosUsuario['login'] . "',
+                    senha = '" . md5($dadosUsuario['senha']) . "'
+                    where idusuario =" . $dadosUsuario['id'];
+
+    if (mysqli_query($conexao, $sql)) {
+        if (mysqli_affected_rows($conexao))
+            $status = true;
+    }
+
     fecharConexaoSql($conexao);
     return $status;
 
 }
-
-function selectByIdUsuario($id)
-{}
-
-function updateUsuario($dadosUsuario)
-{}

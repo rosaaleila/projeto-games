@@ -4,7 +4,7 @@
  * Objetivo: arquivo de rota entre a view e a model
  * Autor: Leila Rosa
  * Data: 07/04/22
- * Versão: 1.4
+ * Versão: 1.5
  *************************************************************/
 
 $action = (string) null;
@@ -83,22 +83,48 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
 
             require_once('controller/controllerUsuarios.php');
 
-            if($action == 'inserir') {
+            if ($action == 'inserir') {
 
                 $result = adicionarUsuario($_POST);
 
                 if (is_bool($result)) {
-                    if($result)
-                        echo('<script> alert("Registro Inserido com Sucesso!"); window.location.href="usuario.php"; </script>');
+                    if ($result)
+                        echo ('<script> alert("Registro Inserido com Sucesso!"); window.location.href="usuario.php"; </script>');
                 } elseif (is_array($result))
-                    echo('<script> alert("' . $result["message"] . '"); window.history.back();  </script>');
-
+                    echo ('<script> alert("' . $result["message"] . '"); window.history.back();  </script>');
             } elseif ($action == 'deletar') {
 
+                $idUsuario = $_GET['id'];
+
+                $result = excluirUsuario($idUsuario);
+
+                if (is_bool($result)) {
+                    if ($result)
+                        echo ('<script> alert("Registro Deletado com Sucesso!"); window.location.href="usuario.php"; </script>');
+                } else if (is_array($result))
+                    echo ('<script> alert("' . $result["message"] . '"); window.history.back(); </script>');
             } elseif ($action == 'buscar') {
 
+                $idUsuario = $_GET['id'];
+
+                $dados = buscarUsuario($idUsuario);
+
+                session_start();
+
+                $_SESSION['dadosUsuario'] = $dados;
+
+                require_once('usuario.php');
             } elseif ($action == 'editar') {
-                
+
+                $idUsuario = $_GET['id'];
+
+                $result = atualizarUsuario($_POST, $idUsuario);
+
+                if (is_bool($result)) {
+                    if ($result)
+                        echo ('<script> alert("Registro Atualizado com Sucesso!"); window.location.href="usuario.php"; </script>');
+                } elseif (is_array($result))
+                    echo ('<script> alert("' . $result["message"] . '"); window.history.back(); </script>');
             }
 
             break;

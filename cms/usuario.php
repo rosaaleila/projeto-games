@@ -1,3 +1,24 @@
+<?php
+
+$form = (string) "router.php?component=usuarios&action=inserir";
+
+if (session_status())
+    if (!empty($_SESSION['dadosUsuario'])) {
+
+        $id = $_SESSION['dadosUsuario']['id'];
+        $nome = $_SESSION['dadosUsuario']['nome'];
+        $login = $_SESSION['dadosUsuario']['login'];
+        $senha = $_SESSION['dadosUsuario']['senha'];
+
+        $form = "router.php?component=usuarios&action=editar&id=" . $id;
+
+        unset($_SESSION['dadosUsuario']);
+    }
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,14 +81,20 @@
         </div>
 
         <div class="container-sessao">
-            <div class="container-infos">
-                <form action="router.php?component=usuarios&action=inserir" method="post">
-                    <p>Nome</p>
-                    <input type="text" name="txtNome">
-                    <p>Login</p>
-                    <input type="text" name="txtLogin">
-                    <p>Senha</p>
-                    <input type="text" name="txtSenha">
+            <div class="container-form-infos">
+                <form action="<?= $form ?>" method="post">
+                    <div class="container-input">
+                        <p>Nome:</p>
+                        <input type="text" name="txtNome" value="<?= isset($nome) ? $nome : null ?>">
+                    </div>
+                    <div class="container-input">
+                        <p>Login:</p>
+                        <input type="text" name="txtLogin" value="<?= isset($login) ? $login : null ?>">
+                    </div>
+                    <div class="container-input">
+                        <p>Senha:</p>
+                        <input type="password" name="txtSenha">
+                    </div>
                     <input type="submit" value="Enviar" class="btnEnviar">
                 </form>
             </div>
@@ -75,7 +102,6 @@
                 <table class="tabela-usuarios">
                     <th>Nome</th>
                     <th>Login</th>
-                    <th>Senha</th>
                     <th>Opções</th>
 
                     <?php
@@ -89,7 +115,6 @@
                         <tr>
                             <td class="td-nome"><?= $item['nome']; ?></td>
                             <td class="td-login"><?= $item['login']; ?></td>
-                            <td class="td-senha"><?= $item['senha']; ?></td>
                             <td class="td-opcoes">
                                 <a href="router.php?component=usuarios&action=buscar&id=<?= $item['id'] ?>"><img src="./imgs/editar.svg" alt="Editar"></a>
                                 <a onclick="return confirm('Deseja realmente excluir esse registro?');" href="router.php?component=usuarios&action=deletar&id=<?= $item['id'] ?>"><img src="./imgs/apagar.png" alt="Apagar"></a>
