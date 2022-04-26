@@ -25,7 +25,7 @@
             <div class="container-sessoes">
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <a href="#"><img src="./imgs/produto.png" alt=""></a>
+                        <a href="produto.php"><img src="./imgs/produto.png" alt=""></a>
                     </div>
                     <p>Adm. de Produtos</p>
                 </div>

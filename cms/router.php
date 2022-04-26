@@ -126,6 +126,41 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
                 } elseif (is_array($result))
                     echo ('<script> alert("' . $result["message"] . '"); window.history.back(); </script>');
             }
+             
+        case 'produtos';
+
+            require_once('controller/controllerProdutos.php');
+
+            if ($action == 'inserir') {
+
+                if(isset($_FILES) && !empty($_FILES))
+                    $result = inserirProduto($_POST, $_FILES);
+                else
+                    $result = inserirProduto($_POST, $_FILES);
+
+                if (is_bool($result)) {
+                    if ($result)
+                        echo ('<script> alert("Registro Inserido com Sucesso!"); window.location.href="produto.php"; </script>');
+                } elseif (is_array($result))
+                    echo ('<script> alert("' . $result["message"] . '"); window.history.back();  </script>');
+
+            } elseif ($action == 'deletar') {
+
+                $idProduto = $_GET['id'];
+
+                $result = excluirProduto($idProduto);
+
+                if(is_bool($result)) {
+                    if($result)
+                        echo ('<script> alert("Registro Deletado com Sucesso!"); window.location.href="produto.php"; </script>');
+                } elseif (is_array($result))
+                    echo ('<script> alert("' . $result["message"] . '"); window.back.history(); </script>');
+
+            } elseif ($action == 'buscar') {
+
+            } elseif ($action == 'editar') {
+
+            }
 
             break;
     }

@@ -1,24 +1,3 @@
-<?php
-
-$form = (string) "router.php?component=usuarios&action=inserir";
-
-if (session_status())
-    if (!empty($_SESSION['dadosUsuario'])) {
-
-        $id = $_SESSION['dadosUsuario']['id'];
-        $nome = $_SESSION['dadosUsuario']['nome'];
-        $login = $_SESSION['dadosUsuario']['login'];
-        $senha = $_SESSION['dadosUsuario']['senha'];
-
-        $form = "router.php?component=usuarios&action=editar&id=" . $id;
-
-        unset($_SESSION['dadosUsuario']);
-    }
-
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +6,7 @@ if (session_status())
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/dashboard.css">
-    <link rel="stylesheet" type="text/css" href="./css/usuarios.css">
+    <link rel="stylesheet" type="text/css" href="./css/produtos.css">
     <title>Dashboard</title>
 </head>
 
@@ -64,7 +43,7 @@ if (session_status())
                 </div>
                 <div class="container-opcoes">
                     <div class="container-icon">
-                        <a href="#"><img src="./imgs/user.png" alt=""></a>
+                        <a href="./usuario.php"><img src="./imgs/user.png" alt=""></a>
                     </div>
                     <p>Usuários</p>
                 </div>
@@ -81,43 +60,57 @@ if (session_status())
         </div>
 
         <div class="container-sessao">
-            <div class="container-form-infos">
-                <form action="<?= $form ?>" method="post">
+        <div class="container-form-infos">
+                <form action="router.php?component=produtos&action=inserir" method="post" enctype="multipart/form-data">
                     <div class="container-input">
                         <p>Nome:</p>
-                        <input type="text" name="txtNome" value="<?= isset($nome) ? $nome : null ?>">
+                        <input type="text" name="txtNome">
                     </div>
                     <div class="container-input">
-                        <p>Login:</p>
-                        <input type="text" name="txtLogin" value="<?= isset($login) ? $login : null ?>">
+                        <p>Descrição:</p>
+                        <input type="text" name="txtDescricao">
                     </div>
                     <div class="container-input">
-                        <p>Senha:</p>
-                        <input type="password" name="txtSenha">
+                        <p>Preço:</p>
+                        <input type="number" name="txtPreco">
+                    </div>
+                    <div class="container-input">
+                        <p>Promoção:</p>
+                        <input type="number" name="txtPromocao">
+                    </div>
+                    <div class="container-input">
+                        <p>Escolha um arquivo:</p>
+                        <input type="file" class="input-arquivo" name="fleFoto" accept=".jpg, .jpeg, .png, .gif, .webp">
                     </div>
                     <input type="submit" value="Enviar" class="btnEnviar">
                 </form>
             </div>
-            <div class="container-usuarios">
-                <table class="tabela-usuarios">
+            <div class="container-produtos">
+                <table class="tabela-produtos">
                     <th>Nome</th>
-                    <th>Login</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Promoção</th>
+                    <th>Imagem</th>
                     <th>Opções</th>
 
                     <?php
 
-                    require_once('controller/controllerUsuarios.php');
-                    $listUsuarios = listarUsuarios();
+                    require_once('controller/controllerProdutos.php');
+                    $listProdutos = listarProdutos();
 
-                    foreach ($listUsuarios as $item) {
-                    ?>
+                    foreach ($listProdutos as $item) {
+                    ?>  
 
                         <tr>
-                            <td class="td-nome"><?= $item['nome']; ?></td>
-                            <td class="td-login"><?= $item['login']; ?></td>
+                            <td class="td-nome"><?= $item['nome'] ?></td>
+                            <td class="td-descricao"><?= $item['descricao'] ?></td>
+                            <td class="td-preco">R$<?= $item['preco'] ?></td>
+                            <td class="td-promocao"><?= $item['promocao'] ?>%</td>
+                            <td class="td-imagem"><img src="arquivos/<?= $item['foto'] ?>" alt=""></td>
                             <td class="td-opcoes">
-                                <a href="router.php?component=usuarios&action=buscar&id=<?= $item['id'] ?>"><img src="./imgs/editar.svg" alt="Editar"></a>
-                                <a onclick="return confirm('Deseja realmente excluir esse registro?');" href="router.php?component=usuarios&action=deletar&id=<?= $item['id'] ?>"><img src="./imgs/apagar.png" alt="Apagar"></a>
+                                <a href="router.php?component=produtos&action=buscar&id=<?= $item['id'] ?>"><img src="./imgs/editar.svg" alt="Editar"></a>
+                                <a onclick="return confirm('Deseja realmente excluir esse registro?');" href="router.php?component=produtos&action=deletar&id=<?= $item['id'] ?>"><img src="./imgs/apagar.png" alt="Apagar"></a>
                             </td>
                         </tr>
 
@@ -127,7 +120,6 @@ if (session_status())
 
                 </table>
             </div>
-
         </div>
     </main>
     <footer>
