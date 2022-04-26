@@ -8,6 +8,8 @@
  * Versão: 1.0
  ***********************************************************************/
 
+require_once('model/bd/conexaoMySql.php');
+
 function inserirProduto ($dadosProduto, $file)
 {
 
@@ -51,7 +53,28 @@ function inserirProduto ($dadosProduto, $file)
 }
 
 function atualizarProduto ($dadosProduto, $id)
-{}
+{
+
+    $status = (bool) false;
+
+    $conexao = abrirConexaoSql();
+
+    $sql = "update tblprodutos set
+                    nome = '" . $dadosProduto['txtNome'] . "',
+                    descricao = '" . $dadosProduto['txtDescricao'] . "',
+                    preco = '" . $dadosProduto['txtPreco'] . "',
+                    promocao = '" . $dadosProduto['txtPromocao'] . "'
+                    where idproduto=". $id;
+
+    if (mysqli_query($conexao, $sql))
+        if (mysqli_affected_rows($conexao))
+            $status = true;
+
+        
+    fecharConexaoSql($conexao);
+
+    return $status;
+}
 
 function excluirProduto ($id)
 {
@@ -90,8 +113,29 @@ function listarProdutos()
 
 }
 
-function buscarProdutos($d)
+function buscarProduto($id)
 {
+
+    $conexao = abrirConexaoSql();
+
+    $sql = "select * from tblprodutos where idproduto =". $id;
+
+    $result = mysqli_query($conexao, $sql);
+
+    if ($result) {
+        if($rsDados = mysqli_fetch_assoc($result)) {
+            $arrayDados = array(
+                "id"            => $rsDados['idproduto'],
+                "nome"          => $rsDados['nome'],
+                "descricao"     => $rsDados['descricao'],
+                "preco"         => $rsDados['preco'],
+                "promocao"      => $rsDados['promocao'],
+            );
+        }
+
+        fecharConexaoSql($conexao);
+        return $arrayDados;
+    }
 
 }
 

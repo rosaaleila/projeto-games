@@ -158,7 +158,27 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
 
             } elseif ($action == 'buscar') {
 
+                $idProduto = $_GET['id'];
+
+                $dados = buscarProduto($idProduto);
+
+                session_start();
+
+                $_SESSION['dadosProduto'] = $dados;
+
+                require_once('produto.php');
+
             } elseif ($action == 'editar') {
+
+                $idProduto = $_GET['id'];
+
+                $result = atualizarProduto($_POST, $idProduto);
+
+                if(is_bool($result)) {
+                    if($result)
+                        echo ('<script> alert("Registro Atualizado com Sucesso!"); window.location.href="produto.php"; </script>');
+                } elseif(is_array($result))
+                    echo ('<script> alert("' . $result["message"] . '"); window.history.back(); </script>');
 
             }
 

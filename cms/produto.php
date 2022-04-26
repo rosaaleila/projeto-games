@@ -1,3 +1,24 @@
+<?php
+
+$form = (string) "router.php?component=produtos&action=inserir";
+
+if (session_status())
+    if(!empty($_SESSION['dadosProduto'])) {
+
+        $id = $_SESSION['dadosProduto']['id'];
+        $nome = $_SESSION['dadosProduto']['nome'];
+        $descricao = $_SESSION['dadosProduto']['descricao'];
+        $preco = $_SESSION['dadosProduto']['preco'];
+        $promocao = $_SESSION['dadosProduto']['promocao'];
+
+        $form = "router.php?component=produtos&action=editar&id=" . $id;
+
+        unset($_SESSION['$dadosProduto']);
+    
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,22 +82,22 @@
 
         <div class="container-sessao">
         <div class="container-form-infos">
-                <form action="router.php?component=produtos&action=inserir" method="post" enctype="multipart/form-data">
+                <form action="<?= $form ?>" method="post" enctype="multipart/form-data">
                     <div class="container-input">
                         <p>Nome:</p>
-                        <input type="text" name="txtNome">
+                        <input type="text" name="txtNome" value="<?= isset($nome) ? $nome : null ?>">
                     </div>
                     <div class="container-input">
                         <p>Descrição:</p>
-                        <input type="text" name="txtDescricao">
+                        <input type="text" name="txtDescricao" value="<?= isset($descricao) ? $descricao : null ?>">
                     </div>
                     <div class="container-input">
                         <p>Preço:</p>
-                        <input type="number" name="txtPreco">
+                        <input type="number" name="txtPreco" value="<?= isset($preco) ? $preco : null ?>">
                     </div>
                     <div class="container-input">
                         <p>Promoção:</p>
-                        <input type="number" name="txtPromocao">
+                        <input type="number" name="txtPromocao" value="<?= isset($promocao) ? $promocao : null ?>">
                     </div>
                     <div class="container-input">
                         <p>Escolha um arquivo:</p>
