@@ -1,6 +1,9 @@
 <?php
 
+require_once('modulo/config.php');
+
 $form = (string) "router.php?component=produtos&action=inserir";
+$foto = (string) null;
 
 if (session_status())
     if(!empty($_SESSION['dadosProduto'])) {
@@ -10,6 +13,7 @@ if (session_status())
         $descricao = $_SESSION['dadosProduto']['descricao'];
         $preco = $_SESSION['dadosProduto']['preco'];
         $promocao = $_SESSION['dadosProduto']['promocao'];
+        $foto = $_SESSION['dadosProduto']['foto'];
 
         $form = "router.php?component=produtos&action=editar&id=" . $id;
 
@@ -99,10 +103,16 @@ if (session_status())
                         <p>Promoção:</p>
                         <input type="number" name="txtPromocao" value="<?= isset($promocao) ? $promocao : null ?>">
                     </div>
-                    <div class="container-input">
-                        <p>Escolha um arquivo:</p>
-                        <input type="file" class="input-arquivo" name="fleFoto" accept=".jpg, .jpeg, .png, .gif, .webp">
+                    <div class="container-input-file">
+                        <div class="container-input-fle">
+                            <p>Escolha um arquivo:</p>
+                            <input type="file" class="input-arquivo" name="fleFoto" accept=".jpg, .jpeg, .png, .gif, .webp">
+                        </div>
+                        <div class="container-img-produto">
+                            <img src="<?= DIRETORIO_FILE_UPLOAD.$foto ?>" alt="">
+                        </div>
                     </div>
+                    
                     <input type="submit" value="Enviar" class="btnEnviar">
                 </form>
             </div>
@@ -120,7 +130,10 @@ if (session_status())
                     require_once('controller/controllerProdutos.php');
                     $listProdutos = listarProdutos();
 
-                    foreach ($listProdutos as $item) {
+                    foreach ($listProdutos as $item)
+                    {
+                        $foto = $item['foto'];
+
                     ?>  
 
                         <tr>
@@ -128,10 +141,10 @@ if (session_status())
                             <td class="td-descricao"><?= $item['descricao'] ?></td>
                             <td class="td-preco">R$<?= $item['preco'] ?></td>
                             <td class="td-promocao"><?= $item['promocao'] ?>%</td>
-                            <td class="td-imagem"><img src="arquivos/<?= $item['foto'] ?>" alt=""></td>
+                            <td class="td-imagem"><img src="<?= DIRETORIO_FILE_UPLOAD.$foto ?>" alt=""></td>
                             <td class="td-opcoes">
                                 <a href="router.php?component=produtos&action=buscar&id=<?= $item['id'] ?>"><img src="./imgs/editar.svg" alt="Editar"></a>
-                                <a onclick="return confirm('Deseja realmente excluir esse registro?');" href="router.php?component=produtos&action=deletar&id=<?= $item['id'] ?>"><img src="./imgs/apagar.png" alt="Apagar"></a>
+                                <a onclick="return confirm('Deseja realmente excluir esse registro?');" href="router.php?component=produtos&action=deletar&id=<?= $item['id'] ?>&foto=<?= $foto ?>"><img src="./imgs/apagar.png" alt="Apagar"></a>
                             </td>
                         </tr>
 

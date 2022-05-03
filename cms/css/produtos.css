@@ -27,8 +27,8 @@ th {
 }
 
 form {
-    width: 30vw;
-    height: 40vh;
+    width: 40vw;
+    height: 50vh;
     background-color: whitesmoke;
     font-family: 'Open Sans', sans-serif;
     font-size: 1.1rem;
@@ -49,6 +49,16 @@ form {
     height: 30px;
 }
 
+.container-img-produto {
+    width: 200px;
+    height: 100px;
+}
+
+.container-img-produto img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 .btnEnviar {
     cursor: pointer;
     color: whitesmoke;
@@ -62,6 +72,17 @@ form {
     display: flex;
     gap: 10px;
     align-items: baseline;
+}
+
+.container-input-fle {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    height: 50px;
+}
+
+.container-input-file {
+    display: flex;
 }
 
 .container-form-infos p {

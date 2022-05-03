@@ -17,7 +17,7 @@ function inserirProduto ($dadosProduto, $file)
 
     if (!empty($dadosProduto)) {
         if (!empty($dadosProduto['txtNome']) && !empty($dadosProduto['txtDescricao'])) {
-            if($file != null) {
+            if($file['fleFoto']['name'] != null) {
                 
                 require_once('modulo/upload.php');
 
@@ -25,6 +25,10 @@ function inserirProduto ($dadosProduto, $file)
 
                 if(is_array($nomeFoto))
                     return $nomeFoto;
+            } else {
+
+                $nomeFoto = "semfoto.jpg";
+
             }
 
                 $arrayDados = array(
@@ -52,40 +56,64 @@ function inserirProduto ($dadosProduto, $file)
     }
 }
 
-function atualizarProduto ($dadosProduto, $id)
+function atualizarProduto ($dadosProduto, $arrayDados)
 {
 
-    $status = (bool) false;
+    $id = $arrayDados['id'];
+    $foto = $arrayDados['foto'];
+    $file = $arrayDados['file'];
 
-    $conexao = abrirConexaoSql();
+    if (!empty($dadosProduto)) {
+        if (!empty($dadosProduto['txtNome']) && !empty($dadosProduto['txtDescricao']) && !$file) {/*O que fica no colchete é o 'name' da input*/
+            if (!empty($id) && is_numeric($id) && $id != 0) {
+                 
+                $arrayDados = array(
+                    "id"        => $id,
+                    "nome"      => $dadosProduto['txtDescricao'],
+                    "preco"     => $dadosProduto['txtPreco'],
+                    "promocao"  => $dadosProduto['txtPromocao'],
+                );
 
-    $sql = "update tblprodutos set
-                    nome = '" . $dadosProduto['txtNome'] . "',
-                    descricao = '" . $dadosProduto['txtDescricao'] . "',
-                    preco = '" . $dadosProduto['txtPreco'] . "',
-                    promocao = '" . $dadosProduto['txtPromocao'] . "'
-                    where idproduto=". $id;
+                require_once('model/bd/contato.php');
 
-    if (mysqli_query($conexao, $sql))
-        if (mysqli_affected_rows($conexao))
-            $status = true;
-
-        
-    fecharConexaoSql($conexao);
-
-    return $status;
+                if (updateContato($arrayDados))
+                    return true;
+                else
+                    return array(
+                        'idErro' => 1,
+                        'message' => 'Não foi possivel atualizar os dados no Banco de Dados.'
+                    );
+            } else 
+                return array(
+                    'idErro'    => 4,
+                    'message'   => 'Não é possível editar um registro com ID inválido.'
+                );
+        } else {
+            return array(
+                'idErro' => 2,
+                'message' => 'Existem campos obrigatórios que não foram preenchidos.'
+            );
+        }
+    }
+    
 }
 
-function excluirProduto ($id)
+function excluirProduto ($dadosProduto)
 {
+
+    $id = $dadosProduto['id'];
+    
+    $foto = $dadosProduto['foto'];
 
     if ($id != 0 && !empty($id) && is_numeric($id)) {
     
         require_once('model/bd/produtos.php');
+        require_once('modulo/config.php'); 
 
-        if(deleteProduto($id))
+        if(deleteProduto($id)) {
+            unlink(DIRETORIO_FILE_UPLOAD.$foto);
             return true;
-        else
+        } else
             return array(
                 'idErro'   => 3,
                 'message'   => 'O banco de dados não pode excluir o registro.'
@@ -116,25 +144,21 @@ function listarProdutos()
 function buscarProduto($id)
 {
 
-    $conexao = abrirConexaoSql();
+    if ($id != 0 && !empty($id) && is_numeric($id)) {
 
-    $sql = "select * from tblprodutos where idproduto =". $id;
+        require_once('model/bd/produtos.php');
+        
+        $dados = selectByIdProduto($id);
 
-    $result = mysqli_query($conexao, $sql);
-
-    if ($result) {
-        if($rsDados = mysqli_fetch_assoc($result)) {
-            $arrayDados = array(
-                "id"            => $rsDados['idproduto'],
-                "nome"          => $rsDados['nome'],
-                "descricao"     => $rsDados['descricao'],
-                "preco"         => $rsDados['preco'],
-                "promocao"      => $rsDados['promocao'],
-            );
-        }
-
-        fecharConexaoSql($conexao);
-        return $arrayDados;
+        if (!empty($dados))
+            return $dados;
+        else
+            return false;
+    } else {
+        return array(
+            'idErro'   => 4,
+            'message'   => 'Não é possível buscar um registro sem informar um ID válido.'
+        );
     }
 
 }

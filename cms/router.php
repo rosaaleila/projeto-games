@@ -147,8 +147,14 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
             } elseif ($action == 'deletar') {
 
                 $idProduto = $_GET['id'];
+                $foto = $_GET['foto'];
 
-                $result = excluirProduto($idProduto);
+                $dadosProduto = array(
+                    "id"    => $idProduto,
+                    "foto"  => $foto
+                );
+
+                $result = excluirProduto($dadosProduto);
 
                 if(is_bool($result)) {
                     if($result)
@@ -171,8 +177,15 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
             } elseif ($action == 'editar') {
 
                 $idProduto = $_GET['id'];
+                $foto = $_GET['foto'];
 
-                $result = atualizarProduto($_POST, $idProduto);
+                $arrayDados = array(
+                    "id"    => $idProduto,
+                    "foto"  => $foto,
+                    "file"  => $_FILES
+                );
+
+                $result = atualizarProduto($_POST, $arrayDados);
 
                 if(is_bool($result)) {
                     if($result)
