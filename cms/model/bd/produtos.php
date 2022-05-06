@@ -21,13 +21,15 @@
                     descricao,
                     preco,
                     promocao,
-                    imagem)
+                    foto,
+                    destaque)
                     values
                     ('" . $dadosProduto['nome'] . "',
                     '" . $dadosProduto['descricao'] . "',
                     '" . $dadosProduto['preco'] . "',
                     '" . $dadosProduto['promocao'] . "',
-                    '" . $dadosProduto['foto'] . "')";
+                    '" . $dadosProduto['foto'] . "',
+                    '" . $dadosProduto['destaque'] . "')";
 
     if (mysqli_query($conexao, $sql)) {
         if(mysqli_affected_rows($conexao))
@@ -79,8 +81,10 @@
                 "descricao"     => $rsDados['descricao'],
                 "preco"         => $rsDados['preco'],
                 "promocao"      => $rsDados['promocao'],
-                "foto"          => $rsDados['imagem']
+                "destaque"      => $rsDados['destaque'],
+                "foto"          => $rsDados['foto']
              );
+
             $cont++;
         }
 
@@ -108,7 +112,8 @@
                 "nome"          => $rsDados['nome'],
                 "descricao"     => $rsDados['descricao'],
                 "preco"         => $rsDados['preco'],
-                "foto"          => $rsDados['imagem'],
+                "foto"          => $rsDados['foto'],
+                "destaque"      => $rsDados['destaque'],
                 "promocao"      => $rsDados['promocao'],
             );
         }
@@ -127,17 +132,18 @@
     $conexao = abrirConexaoSql();
 
     $sql = "update tblprodutos set
-                    nome = '" . $dadosProduto['txtNome'] . "',
-                    descricao = '" . $dadosProduto['txtDescricao'] . "',
-                    preco = '" . $dadosProduto['txtPreco'] . "',
-                    promocao = '" . $dadosProduto['txtPromocao'] . "'
-                    where idproduto=". $id;
+                    nome = '" . $dadosProduto['nome'] . "',
+                    descricao = '" . $dadosProduto['descricao'] . "',
+                    preco = '" . $dadosProduto['preco'] . "',
+                    foto = '" . $dadosProduto['foto'] . "',
+                    destaque = '" . $dadosProduto['destaque'] . "',
+                    promocao = '" . $dadosProduto['promocao'] . "'
+                    where idproduto=". $dadosProduto['id'];
 
     if (mysqli_query($conexao, $sql))
         if (mysqli_affected_rows($conexao))
             $status = true;
 
-        
     fecharConexaoSql($conexao);
 
     return $status;

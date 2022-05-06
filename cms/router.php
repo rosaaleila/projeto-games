@@ -136,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
                 if(isset($_FILES) && !empty($_FILES))
                     $result = inserirProduto($_POST, $_FILES);
                 else
-                    $result = inserirProduto($_POST, $_FILES);
+                    $result = inserirProduto($_POST, null);
 
                 if (is_bool($result)) {
                     if ($result)

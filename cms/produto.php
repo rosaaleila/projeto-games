@@ -14,8 +14,13 @@ if (session_status())
         $preco = $_SESSION['dadosProduto']['preco'];
         $promocao = $_SESSION['dadosProduto']['promocao'];
         $foto = $_SESSION['dadosProduto']['foto'];
+        
+        if ($_SESSION['dadosProduto']['destaque'] == 1) 
+            $statusDestaque = "checked";
+        else
+            $statusDestaque = null;
 
-        $form = "router.php?component=produtos&action=editar&id=" . $id;
+        $form = "router.php?component=produtos&action=editar&id=" . $id . "&foto=" . $foto;
 
         unset($_SESSION['$dadosProduto']);
     
@@ -103,6 +108,10 @@ if (session_status())
                         <p>Promoção:</p>
                         <input type="number" name="txtPromocao" value="<?= isset($promocao) ? $promocao : null ?>">
                     </div>
+                    <div class="container-input">
+                        <p>Produto em Destaque:</p>
+                        <input type="checkbox" name="chkDestaque" <?= isset($statusDestaque) ? $statusDestaque : null ?>>
+                    </div>
                     <div class="container-input-file">
                         <div class="container-input-fle">
                             <p>Escolha um arquivo:</p>
@@ -122,6 +131,7 @@ if (session_status())
                     <th>Descrição</th>
                     <th>Preço</th>
                     <th>Promoção</th>
+                    <th>Destaque</th>
                     <th>Imagem</th>
                     <th>Opções</th>
 
@@ -133,6 +143,12 @@ if (session_status())
                     foreach ($listProdutos as $item)
                     {
                         $foto = $item['foto'];
+                        $destaque = $item['destaque'];
+                        $destaqueStatus = (string) "Não";
+
+                        if($destaque == 1) {
+                            $destaqueStatus = "Sim";
+                        }
 
                     ?>  
 
@@ -141,6 +157,7 @@ if (session_status())
                             <td class="td-descricao"><?= $item['descricao'] ?></td>
                             <td class="td-preco">R$<?= $item['preco'] ?></td>
                             <td class="td-promocao"><?= $item['promocao'] ?>%</td>
+                            <td class="td-promocao"><?= $destaqueStatus ?></td>
                             <td class="td-imagem"><img src="<?= DIRETORIO_FILE_UPLOAD.$foto ?>" alt=""></td>
                             <td class="td-opcoes">
                                 <a href="router.php?component=produtos&action=buscar&id=<?= $item['id'] ?>"><img src="./imgs/editar.svg" alt="Editar"></a>

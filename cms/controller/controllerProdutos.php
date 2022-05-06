@@ -13,10 +13,12 @@ require_once('model/bd/conexaoMySql.php');
 function inserirProduto ($dadosProduto, $file)
 {
 
-    $nomeFoto = (string) null;
+    $nomeFoto = (string) "semfoto/semfoto.jpg";
+    $statusDestaque = (int) 0;
 
     if (!empty($dadosProduto)) {
-        if (!empty($dadosProduto['txtNome']) && !empty($dadosProduto['txtDescricao'])) {
+        if (!empty($dadosProduto['txtNome']) && !empty($dadosProduto['txtDescricao']) && !empty($dadosProduto['txtPreco'])) {
+            
             if($file['fleFoto']['name'] != null) {
                 
                 require_once('modulo/upload.php');
@@ -25,17 +27,17 @@ function inserirProduto ($dadosProduto, $file)
 
                 if(is_array($nomeFoto))
                     return $nomeFoto;
-            } else {
-
-                $nomeFoto = "semfoto.jpg";
-
             }
+
+            if (isset($dadosProduto['chkDestaque']))
+                $statusDestaque = 1;
 
                 $arrayDados = array(
                     "nome"      => $dadosProduto['txtNome'],
                     "descricao" => $dadosProduto['txtDescricao'],
                     "preco"     => $dadosProduto['txtPreco'],
                     "promocao"  => $dadosProduto['txtPromocao'],
+                    "destaque"  => $statusDestaque,
                     "foto"      => $nomeFoto
                 );
     
@@ -62,23 +64,46 @@ function atualizarProduto ($dadosProduto, $arrayDados)
     $id = $arrayDados['id'];
     $foto = $arrayDados['foto'];
     $file = $arrayDados['file'];
+    $destaque = (int) 0;
 
     if (!empty($dadosProduto)) {
-        if (!empty($dadosProduto['txtNome']) && !empty($dadosProduto['txtDescricao']) && !$file) {/*O que fica no colchete é o 'name' da input*/
+        if (!empty($dadosProduto['txtNome']) && !empty($dadosProduto['txtDescricao'])) {/*O que fica no colchete é o 'name' da input*/
             if (!empty($id) && is_numeric($id) && $id != 0) {
                  
+
+                if($file['fleFoto']['name'] != null) {
+
+                    require_once('modulo/upload.php');
+
+                    $novaFoto = uploadFile($file['fleFoto']);
+
+                } else {
+
+                    $novaFoto = $foto;
+                
+                }
+
+                if (isset($dadosProduto['chkDestaque'])) {
+                    $destaque = 1;
+                }
+
                 $arrayDados = array(
                     "id"        => $id,
-                    "nome"      => $dadosProduto['txtDescricao'],
+                    "nome"      => $dadosProduto['txtNome'],
+                    "descricao" => $dadosProduto['txtDescricao'],
                     "preco"     => $dadosProduto['txtPreco'],
                     "promocao"  => $dadosProduto['txtPromocao'],
+                    "destaque"  => $destaque,
+                    "foto"      => $novaFoto
                 );
 
-                require_once('model/bd/contato.php');
+                require_once('model/bd/produtos.php');
 
-                if (updateContato($arrayDados))
+                if (updateProduto($arrayDados)) {
+                    if ($novaFoto != $foto)
+                        unlink(DIRETORIO_FILE_UPLOAD.$foto);
                     return true;
-                else
+                } else
                     return array(
                         'idErro' => 1,
                         'message' => 'Não foi possivel atualizar os dados no Banco de Dados.'
@@ -111,8 +136,19 @@ function excluirProduto ($dadosProduto)
         require_once('modulo/config.php'); 
 
         if(deleteProduto($id)) {
-            unlink(DIRETORIO_FILE_UPLOAD.$foto);
-            return true;
+
+            if($foto != null && $foto != "semfoto/semfoto.jpg") {
+                if(unlink(DIRETORIO_FILE_UPLOAD.$foto))
+                    return true;
+                else
+                    return array(
+                        'idErro'    => 5, 
+                        'message'   => "A imagem não pode ser excluída no."
+                    );
+
+            } else
+                return true;
+
         } else
             return array(
                 'idErro'   => 3,
@@ -133,10 +169,17 @@ function listarProdutos()
     require_once('model/bd/produtos.php');
 
     $dados = selectAllProdutos();
+/*     $statusDestaque = $dados['destaque']; */
 
-    if (!empty($dados))
+    if (!empty($dados)) {
+        /* if ($dados['destaque'] == 1)
+            $statusDestaque = true;
+        else
+            $statusDestaque = false; */
+        
+        /* $dados['destaque'] = $statusDestaque; */
         return $dados;
-    else
+    } else
         return false;
 
 }

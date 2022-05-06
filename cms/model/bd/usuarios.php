@@ -98,7 +98,7 @@ function selectByIdUsuario($id)
             "id"    => $dados['idusuario'],
             "nome"    => $dados['nome'],
             "login"    => $dados['login'],
-            "senha"    => $dados['senha'],
+            "senha"    => $dados['senha']
         );
     }
 
