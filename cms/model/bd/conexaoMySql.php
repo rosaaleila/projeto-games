@@ -10,7 +10,7 @@
     const SERVER = 'localhost';
     const USER = 'root';
     const PASSWORD = 'bcd127';
-    const DATABASE = 'dbgames';
+    const DATABASE = 'teste';
     
     $resultado = abrirConexaoSql();
 

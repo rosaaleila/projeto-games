@@ -114,7 +114,7 @@
                 "preco"         => $rsDados['preco'],
                 "foto"          => $rsDados['foto'],
                 "destaque"      => $rsDados['destaque'],
-                "promocao"      => $rsDados['promocao'],
+                "promocao"      => $rsDados['promocao']
             );
         }
 
@@ -149,6 +149,5 @@
     return $status;
 
  }
-
 
 ?>

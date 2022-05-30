@@ -77,6 +77,12 @@ if (session_status())
                     </div>
                     <p>Usuários</p>
                 </div>
+                <div class="container-opcoes">
+                    <div class="container-icon">
+                        <a href="./produto-categoria.php"><img src="./imgs/gerenciamento.png" alt=""></a>
+                    </div>
+                    <p>Produto-Categoria</p>
+                </div>
             </div>
             <div class="container-infos">
                 <p>Bem-vindo {nome}</p>

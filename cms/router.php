@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
                 } elseif (is_array($result))
                     echo ('<script> alert("' . $result["message"] . '");  </script>');
             }
-
+            break;
         case 'categorias';
 
             require_once('controller/controllerCategorias.php');
@@ -79,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
                 } elseif (is_array($result))
                     echo ('<script> alert("' . $result["message"] . '"); window.history.back(); </script>');
             }
+            break;
         case 'usuarios';
 
             require_once('controller/controllerUsuarios.php');
@@ -126,7 +127,8 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
                 } elseif (is_array($result))
                     echo ('<script> alert("' . $result["message"] . '"); window.history.back(); </script>');
             }
-             
+
+            break;
         case 'produtos';
 
             require_once('controller/controllerProdutos.php');
@@ -193,6 +195,53 @@ if ($_SERVER['REQUEST_METHOD'] ==  'GET' || $_SERVER['REQUEST_METHOD'] ==  'POST
                 } elseif(is_array($result))
                     echo ('<script> alert("' . $result["message"] . '"); window.history.back(); </script>');
 
+            }
+
+            break;
+        case 'gerenciamento':
+
+            require_once('./controller/controllerGerenciamento.php');
+
+            if ($action == 'inserir') {
+
+                $result = adicionarProdutoCategoria($_POST);
+
+                if (is_bool($result)) {
+                    if ($result)
+                        echo ('<script> alert("Registro Inserido com Sucesso!"); window.history.back(); </script>');
+                } elseif (is_array($result))
+                    echo ('<script> alert("' . $result["message"] . '"); window.history.back();  </script>');
+
+            } elseif ($action == 'deletar') {
+                $id = $_GET['id'];
+
+                $result = excluirProdutoCategoria($id);
+
+                if (is_bool($result)) {
+                    if ($result)
+                        echo ('<script> alert("Registro Deletado com Sucesso!"); window.history.back(); </script>');
+                } else if (is_array($result))
+                    echo ('<script> alert("' . $result["message"] . '"); window.history.back(); </script>');
+            } elseif ($action == 'buscar') {
+                $id = $_GET['id'];
+
+                $dados = buscarProdutoCategoria($id);
+
+                session_start();
+
+                $_SESSION['dados'] = $dados;
+
+                require_once('produto-categoria.php');
+            } elseif ($action == 'editar') {
+                $id = $_GET['id'];
+
+                $result = atualizarProdutoCategoria($_POST, $id);
+
+                if (is_bool($result)) {
+                    if ($result)
+                        echo ('<script> alert("Registro Atualizado com Sucesso!"); window.history.back(); </script>');
+                } elseif (is_array($result))
+                    echo ('<script> alert("' . $result["message"] . '"); window.history.back(); </script>');
             }
 
             break;
