@@ -1,5 +1,7 @@
 <?php
 
+$idproduto = null;
+$idcategoria = null;
 $form = (string) "router.php?component=gerenciamento&action=inserir";
 
 if (session_status())
